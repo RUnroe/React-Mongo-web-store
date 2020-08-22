@@ -17,18 +17,27 @@ class App extends Component {
     //this.changeKey = this.changeKey.bind(this);
 
     this.state = {
-      key: '',
-      name: '',
+      key: "",
+      name: "",
+      email: "",
       loggedIn: false
     };
   }
 
-  changeKey = (key, name) => {
+  changeKey = (key, name, email) => {
     this.setState({
       key: key,
-      name: name
+      name: name,
+      email: email
     });
     this.isValid();
+  }
+
+  updateUser = (name, email) => {
+    this.setState({
+      name: name,
+      email: email
+    });
   }
 
   isValid = () => {
@@ -36,13 +45,22 @@ class App extends Component {
     .then(response => {
         return response.json();
     }).then(data => {
-        console.log(data);
         this.setState({
           loggedIn: data
         });
     });
   }
 
+
+  signout = () => {
+    console.log("Signed out");
+    this.setState({
+      name: "",
+      email: "",
+      key: "",
+      loggedIn: false
+    })
+  }
 
 
   render() {
@@ -56,7 +74,7 @@ class App extends Component {
                 <Route exact path="/signup" render={props => 
                   (<Signup/>)}/>
                 <Route exact path="/account/edit" render={props => 
-                  (<EditAccount/>)}/>
+                  (<EditAccount name={this.state.name} email={this.state.email} loggedIn={this.state.loggedIn} userKey={this.state.key} updateUser={this.updateUser}/>)}/>
                 <Route exact path="/cart" render={props => 
                   (<Cart />)}/>
                 <Route exact path="/orders" render={props => 
@@ -67,8 +85,9 @@ class App extends Component {
         <nav>
           {this.state.loggedIn && <>
             <Link to="/">Home</Link>
-            <Link to="/signup">Sgfdg</Link>
-            <Link to="/cart">Cart</Link> </>
+            <Link to="/account/edit">{this.state.name}</Link>
+            <Link to="/cart">Cart</Link> 
+            <div onClick={() => this.signout()}>Sign out</div></>
           }
           {!this.state.loggedIn && <>
             <Link to="/">Home</Link>

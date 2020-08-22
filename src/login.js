@@ -6,7 +6,6 @@ import { Redirect } from 'react-router';
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.changeKey = this.props.action.bind(this);
         this.state = {
             email: "",
             password: "",
@@ -31,8 +30,9 @@ class Login extends Component {
                 email: "",
                 password: ""
             });
+            console.log(response);
             if(response) {
-                this.changeKey(response.key, response.name);
+                this.props.action(response.key, response.name, response.email);
                 this.setState({
                     redirect: "/"
                 });

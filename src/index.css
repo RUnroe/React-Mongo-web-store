@@ -6,3 +6,7 @@
 .hidden {
   visibility: hidden;
 }
+
+.passwordDiv {
+  border: 1px solid #777;
+}
