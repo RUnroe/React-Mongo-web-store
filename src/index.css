@@ -10,3 +10,10 @@
 .passwordDiv {
   border: 1px solid #777;
 }
+
+.itemDiv {
+  max-width: 300px;
+}
+.itemDiv > img {
+  width: 100%;
+}

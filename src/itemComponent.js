@@ -13,7 +13,7 @@ class Item extends Component {
                 <div className="itemDiv">
                     <img src={this.props.entry.imgSrc}/>
                     <p className="nameTag">{this.props.entry.name}</p>
-                    <p className="priceTag">{this.props.entry.price}</p>
+                    <p className="priceTag">${this.props.entry.price}</p>
                 </div>
             </a>
         );

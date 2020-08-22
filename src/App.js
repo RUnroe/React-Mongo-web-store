@@ -67,8 +67,8 @@ class App extends Component {
     console.log("Logged in: ", this.state.loggedIn);
     let routes = <> <Route exact path="/" render={props => 
                   (<Landing/>)}/>
-                <Route exact path="/product" render={props => 
-                  (<Product/>)}/>
+                <Route path="/product/:id" render={props => 
+                  (<Product itemID={props.match.params.id} loggedIn={this.state.loggedIn} userKey={this.state.key}/>)}/>
                 <Route exact path="/login" render={props => 
                   (<Login action={this.changeKey}/>)}/>
                 <Route exact path="/signup" render={props => 

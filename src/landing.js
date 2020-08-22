@@ -30,7 +30,7 @@ class Landing extends Component {
         return(
             <div>
                 <div id="itemContainer">
-                    {this.state.itemList.map(entry => (<Item entry={entry} />))}
+                    {this.state.itemList.map(entry => (<Item entry={entry} key={entry.itemID} />))}
                 </div>
             </div>
         );

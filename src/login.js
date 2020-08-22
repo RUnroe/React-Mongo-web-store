@@ -62,6 +62,7 @@ class Login extends Component {
                     <input id="password" type="password" value={this.state.password} onChange={event => this.setState({password: event.target.value})}/>
                     <p className={this.state.displayError ? "errMsg" : "errMsg hidden"}>Invalid email and/or password</p>
                     <button onClick={this.sumbitData}>Log in</button>
+                    <p>Don't have an account? Get one <a href="/signup">here</a></p>
                 </section>
             </section>
         );
