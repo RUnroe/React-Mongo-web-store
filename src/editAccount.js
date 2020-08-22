@@ -9,9 +9,9 @@ class EditAccount extends Component {
     }
     render() {
         return(
-            <div>
-
-            </div>
+            <section>
+                
+            </section>
         );
     }
 }
