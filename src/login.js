@@ -17,14 +17,16 @@ class Login extends Component {
 
 
     sumbitData = () => {
+        if(!this.state.email || !this.state.password) {
+            this.displayError();
+        }
         fetch("http://localhost:3001/validate", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ email: this.state.email, password: this.state.password})
+            body: JSON.stringify({ "email": this.state.email, "password": this.state.password})
         }).then(response => {
             return response.json();
         }).then(response => {
-            console.log(response);
             this.setState({
                 email: "",
                 password: ""
@@ -36,10 +38,14 @@ class Login extends Component {
                 });
             }
             else{
-                this.setState({
-                    displayError: true
-                });
+                this.displayError();
             }
+        });
+    }
+
+    displayError = () => {
+        this.setState({
+            displayError: true
         });
     }
 
