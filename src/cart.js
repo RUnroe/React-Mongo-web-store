@@ -64,8 +64,14 @@ class Cart extends Component {
         
     }
 
+    
+
     componentWillUnmount() {
-        
+        fetch(`http://localhost:3001/cart?key=${this.props.userKey}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"cart": this.state.cartList})
+        });
     }
 
     render() {
