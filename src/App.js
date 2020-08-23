@@ -76,7 +76,7 @@ class App extends Component {
                 <Route exact path="/account/edit" render={props => 
                   (<EditAccount name={this.state.name} email={this.state.email} loggedIn={this.state.loggedIn} userKey={this.state.key} updateUser={this.updateUser}/>)}/>
                 <Route exact path="/cart" render={props => 
-                  (<Cart />)}/>
+                  (<Cart userKey={this.state.key} loggedIn={this.state.loggedIn}/>)}/>
                 <Route exact path="/orders" render={props => 
                   (<Orders/>)}/> </>;
 
