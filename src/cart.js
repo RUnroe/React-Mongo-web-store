@@ -38,9 +38,36 @@ class Cart extends Component {
         });
         return (Math.floor(total*100))/100;
     }
+
     checkout = () => {
+        fetch(`http://localhost:3001/checkout?key=${this.props.userKey}`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({})
+        });
+    }
+
+    changeItemQuantity = (itemID, newQuantity) => {
+        this.setState(state => {
+            const cartList = state.cartList.map(item => {
+                if(item.itemID == itemID) {
+                    item.quantity = newQuantity;
+                    console.log(item);
+                }
+                return item;
+            });
+            return {
+                cartList,
+                redirect: null
+            }
+        });
         
     }
+
+    componentWillUnmount() {
+        
+    }
+
     render() {
         if(this.state.redirect) {
             return <Redirect to={this.state.redirect} />
@@ -57,11 +84,11 @@ class Cart extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.cartList.map(cartItem => (<CartItem cartItem={cartItem} key={cartItem.itemID} />))}
+                            {this.state.cartList.map(cartItem => (<CartItem cartItem={cartItem} key={cartItem.itemID} action={this.changeItemQuantity} />))}
                         </tbody>
                     </table>
                     <p>${this.totalPrice()}</p>
-                    <button onClick={this.checkout()}>Check Out</button>
+                    <button onClick={() => this.checkout()}>Check Out</button>
                 </section>
             </section>
         );

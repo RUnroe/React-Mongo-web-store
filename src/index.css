@@ -17,3 +17,17 @@
 .itemDiv > img {
   width: 100%;
 }
+
+.verticalBtns {
+  display:flex;
+  flex-direction: column;
+  height:2.2em;
+}
+
+.verticalBtns > button {
+  flex:1;
+  height:1.1em;
+  width:2em;
+  padding:0;
+
+}
