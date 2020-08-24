@@ -59,7 +59,7 @@ class App extends Component {
       email: "",
       key: "",
       loggedIn: false
-    })
+    });
   }
 
 
@@ -78,7 +78,7 @@ class App extends Component {
                 <Route exact path="/cart" render={props => 
                   (<Cart userKey={this.state.key} loggedIn={this.state.loggedIn}/>)}/>
                 <Route exact path="/orders" render={props => 
-                  (<Orders/>)}/> </>;
+                  (<Orders userKey={this.state.key} loggedIn={this.state.loggedIn}/>)}/> </>;
 
     return (
       <Router>
@@ -86,6 +86,7 @@ class App extends Component {
           {this.state.loggedIn && <>
             <Link to="/">Home</Link>
             <Link to="/account/edit">{this.state.name}</Link>
+            <Link to="/orders">Your Orders</Link>
             <Link to="/cart">Cart</Link> 
             <div onClick={() => this.signout()}>Sign out</div></>
           }

@@ -7,7 +7,8 @@ class Cart extends Component {
         super(props);
         this.state = {
             cartList: [],
-            redirect: null
+            redirect: null,
+            checkedOut: false
         };
     }
 
@@ -44,6 +45,11 @@ class Cart extends Component {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({})
+        }).then(response => {
+            this.setState({
+                cartList: [],
+                checkedOut: true
+            })
         });
     }
 
@@ -58,7 +64,8 @@ class Cart extends Component {
             });
             return {
                 cartList,
-                redirect: null
+                redirect: null,
+                checkedOut: false
             }
         });
         
@@ -75,13 +82,16 @@ class Cart extends Component {
     }
 
     render() {
+        if(!this.props.loggedIn) {
+            return <Redirect to="/" />
+        }
         if(this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
         return(
             <section>
                 <section>
-                    <table>
+                    <table className={this.state.checkedOut ? "hidden" : ""}>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -93,8 +103,8 @@ class Cart extends Component {
                             {this.state.cartList.map(cartItem => (<CartItem cartItem={cartItem} key={cartItem.itemID} action={this.changeItemQuantity} />))}
                         </tbody>
                     </table>
-                    <p>${this.totalPrice()}</p>
-                    <button onClick={() => this.checkout()}>Check Out</button>
+                    <p>{this.state.checkedOut ? "Your order has been placed!" : "$" + this.totalPrice()}</p>
+                    <button className={this.state.checkedOut ? "hidden" : ""} onClick={() => this.checkout()}>Check Out</button>
                 </section>
             </section>
         );
