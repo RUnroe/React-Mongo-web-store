@@ -55,11 +55,16 @@ class Login extends Component {
         }
         return(
             <section className="mainSection">
+                <h1 className="pageTitle">Log In</h1>
                 <section className="formSection">
-                    <label htmlFor="email">Email: </label>
-                    <input id="email" type="email" value={this.state.email} onChange={event => this.setState({email: event.target.value})}/>
-                    <label htmlFor="password">Password: </label>
-                    <input id="password" type="password" value={this.state.password} onChange={event => this.setState({password: event.target.value})}/>
+                    <div>
+                        <label htmlFor="email">Email: </label>
+                        <input id="email" type="email" value={this.state.email} onChange={event => this.setState({email: event.target.value})}/>
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password: </label>
+                        <input id="password" type="password" value={this.state.password} onChange={event => this.setState({password: event.target.value})}/>
+                    </div>
                     <p className={this.state.displayError ? "errMsg" : "errMsg hidden"}>Invalid email and/or password</p>
                     <button onClick={this.sumbitData}>Log in</button>
                     <p>Don't have an account? Get one <a href="/signup">here</a></p>

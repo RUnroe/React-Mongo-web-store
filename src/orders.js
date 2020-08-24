@@ -41,6 +41,7 @@ class Orders extends Component {
         }
         return(
             <section className="mainSection">
+                <h1 className="pageTitle">Orders</h1>
                 <section>
                     <table>
                         <thead>

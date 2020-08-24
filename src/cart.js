@@ -90,6 +90,7 @@ class Cart extends Component {
         }
         return(
             <section className="mainSection">
+                <h1 className="pageTitle">Cart</h1>
                 <section>
                     <table className={this.state.checkedOut ? "hidden" : ""}>
                         <thead>

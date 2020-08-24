@@ -83,10 +83,10 @@ class App extends Component {
         <nav>
           {this.state.loggedIn && <>
             <div><Link to="/">Home</Link></div>
-            <div><Link to="/account/edit">{this.state.name}</Link></div>
+            <section><div><Link to="/account/edit">{this.state.name}</Link></div>
             <div><Link to="/orders">Your Orders</Link></div>
             <div><Link to="/cart">Cart</Link></div>
-            <div onClick={() => this.signout()}>Sign out</div></>
+            <div onClick={() => this.signout()} className="signoutText">Sign Out</div></section></>
           }
           {!this.state.loggedIn && <>
             <div><Link to="/">Home</Link></div>

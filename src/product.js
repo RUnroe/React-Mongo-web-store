@@ -62,32 +62,35 @@ class Product extends Component {
         }
         return(
             <section className="mainSection">
+                <h1 className="pageTitle">{this.state.name}</h1>
                 <section className="product">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Weight</td>
-                                <td>{this.state.weight} oz</td>
-                            </tr>
-                            <tr>
-                                <td>Protection</td>
-                                <td>{this.state.protection}%</td>
-                            </tr>
-                            <tr>
-                                <td>Rating</td>
-                                <td>{this.state.rating}</td>
-                            </tr>
-                            <tr>
-                                <td>Price</td>
-                                <td>${this.state.price}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="tableContainer">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>{this.state.weight} oz</td>
+                                </tr>
+                                <tr>
+                                    <td>Protection</td>
+                                    <td>{this.state.protection}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Rating</td>
+                                    <td>{this.state.rating}</td>
+                                </tr>
+                                <tr>
+                                    <td>Price</td>
+                                    <td>${this.state.price}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <img src={"/" + this.state.imgSrc}/>
-                    <button onClick={this.backToHome}>Go Back</button>
+                    <div className="returnBtnDiv"><button onClick={this.backToHome}>Go Back</button></div>
                     <div className="addToCartDiv">
                         <button onClick={this.addToCart}>Add to Cart</button>
-                        <a href="/cart">Go to Cart</a>
+                        <a href={this.props.loggedIn ? "/cart" : "/login"}>Go to Cart</a>
                     </div>
                 </section>
             </section>

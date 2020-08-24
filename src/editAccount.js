@@ -62,11 +62,16 @@ class EditAccount extends Component {
         }
         return(
             <section className="mainSection">
+                <h1 className="pageTitle">Edit Account</h1>
                 <section className="formSection">
+                    <div>
                     <label htmlFor="email">Email: </label>
                     <input id="email" type="email" value={this.state.email} onChange={event => this.setState({email: event.target.value})}/>
+                    </div>
+                    <div>
                     <label htmlFor="name">Name: </label>
                     <input id="name" type="text" value={this.state.name} onChange={event => this.setState({name: event.target.value})}/>
+                    </div>
                     <div className="passwordDiv">
                         <label htmlFor="password">Password: </label>
                         <input id="password" type="password" value={this.state.password} onChange={event => this.setState({password: event.target.value})}/>

@@ -7,9 +7,7 @@
   visibility: hidden;
 }
 
-.passwordDiv {
-  border: 1px solid #777;
-}
+
 
 .itemDiv {
   max-width: 300px;
@@ -32,11 +30,25 @@
 
 }
 
+
+/* font */
+p, a, td, th, h1, label, input, button, .signoutText {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Button */
+
+button {
+  cursor: pointer;
+}
+
+/* Body */
 #root, body{
   margin:0;
   padding:0;
 }
 
+/* Nav */
 nav {
   position:fixed;
   width:100%;
@@ -51,8 +63,8 @@ nav > section {
   display:flex;
 
 }
-nav a {
-  width: 5em;
+nav a, .signoutText {
+  width: 8em;
   height:100%;
   color: #fff;
   display:flex;
@@ -65,6 +77,14 @@ nav a {
 
 .mainSection {
   margin-top: 3.5em;
+}
+
+.signoutText {
+  cursor: pointer;
+}
+
+.pageTitle {
+  padding: 1em 0 0 3em ;
 }
 
 /* Landing page */
@@ -81,7 +101,7 @@ nav a {
   width: 300px;
   display: grid;
   grid-template-rows: 300px 3em;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 1fr;
   padding:2em;
 
 
@@ -105,4 +125,83 @@ nav a {
   grid-column: 2;
   padding-right: 1em;
 
+}
+
+
+
+/* Product page */
+
+.product {
+  margin: auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  grid-template-columns: 4fr 3fr;
+}
+
+.product > img {
+  width: 100%;
+  margin-top: 3em;
+}
+
+.product > .tableContainer {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:3em;
+}
+
+.tableContainer table, .tableContainer td, .tableContainer th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+td, th {
+  padding: 0.3em;
+}
+.returnBtnDiv {
+  margin-left: 3em;
+}
+
+.addToCartDiv {
+  text-align: center;
+  margin-right: 3em;
+}
+.addToCartDiv > a {
+  margin-top:1em;
+  display:block;
+}
+
+
+
+/* Login page */
+.formSection {
+  margin:auto;
+  max-width: 800px;
+}
+.formSection > div > input {
+  display:block;
+  width: 18em;
+  margin-bottom: 1em;
+}
+.formSection > div {
+  margin:auto;
+  width:fit-content;
+}
+.formSection > p {
+  text-align: center;
+}
+.formSection > button {
+  margin:auto;
+  display: block;
+}
+
+.passwordDiv {
+  border: 1px solid #777;
+  padding: 1em 3em;
+}
+
+/* Cart */
+.delBtn {
+  background-color: red;
+  color:white;
 }

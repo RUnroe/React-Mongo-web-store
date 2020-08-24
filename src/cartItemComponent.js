@@ -26,7 +26,7 @@ class CartItem extends Component {
                         <button onClick={() => this.changeQuantity(1)}>{String.fromCharCode(8743)}</button>
                         <button disabled={this.props.cartItem.quantity <= 0} onClick={() => this.changeQuantity(-1)}>{String.fromCharCode(8744)}</button>
                     </div></td>
-                    <td><button onClick={() => this.deleteItem()}>X</button></td>
+                    <td className="delBtn"><button onClick={() => this.deleteItem()}>X</button></td>
                 </tr>
             );
         }

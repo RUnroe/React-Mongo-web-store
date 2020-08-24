@@ -24,11 +24,15 @@ class Landing extends Component {
     render() {
         if(!this.state.itemList) {
             return( 
-                <section className="mainSection"><div id="itemContainer"></div> </section>
+                <section className="mainSection">
+                    <h1 className="pageTitle">Products</h1>
+                    <div id="itemContainer"></div> 
+                </section>
             )
         }
         return(
             <section className="mainSection">
+                <h1 className="pageTitle">Products</h1>
                 <div id="itemContainer">
                     {this.state.itemList.map(entry => (<Item entry={entry} key={entry.itemID} />))}
                 </div>
