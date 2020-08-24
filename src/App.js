@@ -14,8 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    //this.changeKey = this.changeKey.bind(this);
-
     this.state = {
       key: "",
       name: "",
@@ -84,16 +82,16 @@ class App extends Component {
       <Router>
         <nav>
           {this.state.loggedIn && <>
-            <Link to="/">Home</Link>
-            <Link to="/account/edit">{this.state.name}</Link>
-            <Link to="/orders">Your Orders</Link>
-            <Link to="/cart">Cart</Link> 
+            <div><Link to="/">Home</Link></div>
+            <div><Link to="/account/edit">{this.state.name}</Link></div>
+            <div><Link to="/orders">Your Orders</Link></div>
+            <div><Link to="/cart">Cart</Link></div>
             <div onClick={() => this.signout()}>Sign out</div></>
           }
           {!this.state.loggedIn && <>
-            <Link to="/">Home</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/login">Log In</Link> </>
+            <div><Link to="/">Home</Link></div>
+            <section><div><Link to="/signup">Sign Up</Link></div>
+            <div><Link to="/login">Log In</Link></div></section></>
           }
         </nav>
         {routes}

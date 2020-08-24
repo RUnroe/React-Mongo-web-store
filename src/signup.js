@@ -44,7 +44,7 @@ class Signup extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return(
-            <section>
+            <section className="mainSection">
                 <section className="formSection">
                     <label htmlFor="name">Name: </label>
                     <input id="name" type="text" value={this.state.name} onChange={event => this.setState({name: event.target.value})}/>

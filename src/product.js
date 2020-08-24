@@ -61,7 +61,7 @@ class Product extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return(
-            <section>
+            <section className="mainSection">
                 <section className="product">
                     <table>
                         <tbody>

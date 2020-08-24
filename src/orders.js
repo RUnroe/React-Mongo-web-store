@@ -40,7 +40,7 @@ class Orders extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return(
-            <section>
+            <section className="mainSection">
                 <section>
                     <table>
                         <thead>

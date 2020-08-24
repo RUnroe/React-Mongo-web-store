@@ -61,7 +61,7 @@ class EditAccount extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return(
-            <section>
+            <section className="mainSection">
                 <section className="formSection">
                     <label htmlFor="email">Email: </label>
                     <input id="email" type="email" value={this.state.email} onChange={event => this.setState({email: event.target.value})}/>
