@@ -33,6 +33,9 @@ class Orders extends Component {
     }
 
     render() {
+        if(!this.props.loggedIn) {
+            return <Redirect to="/" />
+        }
         if(this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
