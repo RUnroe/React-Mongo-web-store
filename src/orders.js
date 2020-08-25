@@ -13,6 +13,7 @@ class Orders extends Component {
 
 
     componentDidMount() {
+        this.props.closeMenu();
         if(!this.props.loggedIn){
             this.setState({
                 redirect: "/login"
@@ -42,7 +43,7 @@ class Orders extends Component {
         return(
             <section className="mainSection">
                 <h1 className="pageTitle">Orders</h1>
-                <section>
+                <section id="orderContainer" className="tableContainer">
                     <table>
                         <thead>
                             <tr>

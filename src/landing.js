@@ -10,6 +10,7 @@ class Landing extends Component {
     }
 
     componentDidMount() {
+        this.props.closeMenu();
         fetch(`http://localhost:3001/items`)
         .then(response => {
             return response.json();

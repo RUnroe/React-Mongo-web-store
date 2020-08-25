@@ -20,13 +20,13 @@ class CartItem extends Component {
             return(
                 <tr>
                     <td>{this.props.cartItem.name}</td>
-                    <td>{this.props.cartItem.price}</td>
+                    <td>${this.props.cartItem.price}</td>
                     <td>{this.props.cartItem.quantity}</td>
                     <td><div className="verticalBtns">
                         <button onClick={() => this.changeQuantity(1)}>{String.fromCharCode(8743)}</button>
                         <button disabled={this.props.cartItem.quantity <= 0} onClick={() => this.changeQuantity(-1)}>{String.fromCharCode(8744)}</button>
                     </div></td>
-                    <td className="delBtn"><button onClick={() => this.deleteItem()}>X</button></td>
+                    <td ><button className="delBtn" onClick={() => this.deleteItem()}>X</button></td>
                 </tr>
             );
         }

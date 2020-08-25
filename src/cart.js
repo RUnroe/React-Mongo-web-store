@@ -13,6 +13,7 @@ class Cart extends Component {
     }
 
     componentDidMount() {
+        this.props.closeMenu();
         if(!this.props.loggedIn){
             this.setState({
                 redirect: "/login"
@@ -35,21 +36,27 @@ class Cart extends Component {
     totalPrice = () => {
         let total = 0;
         this.state.cartList.forEach(item => {
-            total += item.quantity * item.price;
+            if(item.quantity > 0) total += item.quantity * item.price;
         });
         return (Math.floor(total*100))/100;
     }
 
     checkout = () => {
-        fetch(`http://localhost:3001/checkout?key=${this.props.userKey}`, {
-            method: "POST",
+        fetch(`http://localhost:3001/cart?key=${this.props.userKey}`, {
+            method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({})
-        }).then(response => {
-            this.setState({
-                cartList: [],
-                checkedOut: true
-            })
+            body: JSON.stringify({"cart": this.state.cartList})
+        }).then( () => {
+            fetch(`http://localhost:3001/checkout?key=${this.props.userKey}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({})
+            }).then(response => {
+                this.setState({
+                    cartList: [],
+                    checkedOut: true
+                });
+            });
         });
     }
 
@@ -91,21 +98,26 @@ class Cart extends Component {
         return(
             <section className="mainSection">
                 <h1 className="pageTitle">Cart</h1>
-                <section>
-                    <table className={this.state.checkedOut ? "hidden" : ""}>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Unit Price</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.cartList.map(cartItem => (<CartItem cartItem={cartItem} key={cartItem.itemID} action={this.changeItemQuantity} />))}
-                        </tbody>
-                    </table>
-                    <p>{this.state.checkedOut ? "Your order has been placed!" : "$" + this.totalPrice()}</p>
-                    <button className={this.state.checkedOut ? "hidden" : ""} onClick={() => this.checkout()}>Check Out</button>
+                <section className="cartContainer">
+                    <div className="container">
+                        <table className={this.state.checkedOut ? "hidden" : ""}>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.cartList.map(cartItem => (<CartItem cartItem={cartItem} key={cartItem.itemID} action={this.changeItemQuantity} />))}
+                            </tbody>
+                        </table>
+                        <p className={this.state.checkedOut ? "" : "hidden"} >Your order has been placed!</p>
+                    </div>
+                    <div className="checkout">
+                        <p className={this.state.checkedOut ? "hidden" : ""} >{"Total: $" + this.totalPrice()}</p>
+                        <div className="buttonContainer"> <button className={this.state.checkedOut ? "hidden" : ""} onClick={() => this.checkout()}>Check Out</button> </div>
+                    </div>
                 </section>
             </section>
         );

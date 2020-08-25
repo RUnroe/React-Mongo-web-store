@@ -11,11 +11,13 @@ class EditAccount extends Component {
             password: "",
             confirmPass: "",
             displayError: false,
-            redirect: null
+            redirect: null,
+            errorMsg: ""
         };
     }
 
     componentDidMount() {
+        this.props.closeMenu();
         if(!this.props.loggedIn) {
             this.setState({
                 redirect: "/"
@@ -33,24 +35,43 @@ class EditAccount extends Component {
     }
 
     sumbitData = () => {
-        if(this.state.password == this.state.confirmPass) {
-            let putData = this.getPutData();
-            fetch(`http://localhost:3001/user?key=${this.props.userKey}`, {
-                method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(putData)
-            }).then(response => {
-                return response.json();
-            }).then(response => {
-                console.log(response);
-                this.props.updateUser(response.name, response.email);
-            });
-        }
-        else{
+        if(this.state.password != this.state.confirmPass) {
             this.setState({
+                errorMsg: "Passwords do not match",
                 displayError: true
             });
+            return;
         }
+
+        if(this.state.password.length < 6) {
+            this.setState({
+                errorMsg: "Password is too short",
+                displayError: true
+            });
+            return;
+        }
+
+
+        let putData = this.getPutData();
+        fetch(`http://localhost:3001/user?key=${this.props.userKey}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(putData)
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            if(!response) {
+                this.setState({
+                    errorMsg: "Email already in use",
+                    displayError: true
+                });
+            }
+            else {
+                this.props.updateUser(response.name, response.email);
+            }
+        });
+        
+        
     }
 
     render() {
@@ -78,7 +99,7 @@ class EditAccount extends Component {
                         <label htmlFor="confirmPass">Confirm Password: </label>
                         <input id="confirmPass" type="password" value={this.state.confirmPass} onChange={event => this.setState({confirmPass: event.target.value})}/>
                     </div>
-                    <p className={this.state.displayError ? "errMsg" : "errMsg hidden"}>Passwords do not match</p>
+                        <p className={this.state.displayError ? "errMsg" : "errMsg hidden"}>{this.state.errorMsg}</p>
                     <button onClick={this.sumbitData}>Submit</button>
                 </section>
             </section>

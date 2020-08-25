@@ -13,7 +13,8 @@ class Product extends Component {
             rating: 0,
             weight: 0,
             imgSrc: "",
-            redirect: null
+            redirect: null,
+            showPrompt: false
         };
     }
 
@@ -51,11 +52,31 @@ class Product extends Component {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({itemID: this.state.itemID})
+            }).then(response => {
+                this.setState({
+                    showPrompt:true
+                });
+                setTimeout(() => {
+                    this.setState({
+                        showPrompt: false
+                    });
+                }, 1100);
             });
         }
     }
 
-
+    routeToCart = () => {
+        if(this.props.loggedIn) {
+            this.setState({
+                redirect: "/cart"
+            });
+        }
+        else {
+            this.setState({
+                redirect: "/login"
+            });
+        }
+    }
     render() {
         if(this.state.redirect) {
             return <Redirect to={this.state.redirect} />
@@ -63,6 +84,7 @@ class Product extends Component {
         return(
             <section className="mainSection">
                 <h1 className="pageTitle">{this.state.name}</h1>
+                <div id="itemAddedPrompt" className={this.state.showPrompt ? "" : "disabled"}>Item Added to Cart</div>
                 <section className="product">
                     <div className="tableContainer">
                         <table>
@@ -90,7 +112,7 @@ class Product extends Component {
                     <div className="returnBtnDiv"><button onClick={this.backToHome}>Go Back</button></div>
                     <div className="addToCartDiv">
                         <button onClick={this.addToCart}>Add to Cart</button>
-                        <a href={this.props.loggedIn ? "/cart" : "/login"}>Go to Cart</a>
+                        <p className="link" onClick={() => this.routeToCart()}>Go to Cart</p>
                     </div>
                 </section>
             </section>

@@ -9,33 +9,58 @@ class Signup extends Component {
             email: "",
             password: "",
             confirmPass: "",
-            displayError: false
+            displayError: false,
+            errorMsg: ""
         };
     }
 
     
     sumbitData = () => {
-        if(this.state.password === this.state.confirmPass) {
-            fetch("http://localhost:3001/user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"},
-                body: JSON.stringify({name: this.state.name, email: this.state.email, password: this.state.password})
-            }).then(response => {
+        if(this.state.password != this.state.confirmPass) {
+            this.setState({
+                errorMsg: "Passwords do not match",
+                displayError: true
+            });
+            return;
+        }
+
+        if(this.state.password.length < 6) {
+            this.setState({
+                errorMsg: "Password is too short",
+                displayError: true
+            });
+            return;
+        }
+        
+
+
+        fetch("http://localhost:3001/user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"},
+            body: JSON.stringify({name: this.state.name, email: this.state.email, password: this.state.password})
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
+            if(!response) {
+                this.setState({
+                    errorMsg: "Email already in use",
+                    displayError: true
+                });
+            }
+            else {
                 this.setState({
                     name: "",
                     email: "",
                     password: "",
                     confirmPass: "",
                     redirect: "/login"
-                })
-            });
-        }
-        else{
-            this.setState({
-                displayError: true
-            });
-        }
+                });
+            }
+        });
+        
+
     }
 
 
@@ -63,7 +88,7 @@ class Signup extends Component {
                         <label htmlFor="confirmPass">Confirm Password: </label>
                         <input id="confirmPass" type="password" value={this.state.confirmPass} onChange={event => this.setState({confirmPass: event.target.value})}/>
                     </div>
-                    <p className={this.state.displayError ? "errMsg" : "errMsg hidden"}>Passwords do not match</p>
+                    <p className={this.state.displayError ? "errMsg" : "errMsg hidden"}>{this.state.errorMsg}</p>
                     <button onClick={this.sumbitData}>Sign up</button>
                     <p>Already have an account? Log in <a href="/login">here</a></p>
                 </section>
